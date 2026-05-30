@@ -1,5 +1,6 @@
 import { LuMessageCircleMore } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa6";
+import { IoSearchOutline } from "react-icons/io5";
 
 function Sidebar() {
   return (
@@ -14,6 +15,17 @@ function Sidebar() {
           <div className="flex justify-center items-center hover:rotate-45 transition delay-100 duration-300 ease-in-out">
             <FaPlus size={50} className="w-1/3 text-white" />
           </div>
+        </div>
+
+        <div className="p-2 relative">
+          <IoSearchOutline className="text-gray-500 absolute left-8 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <input
+            className="ps-10 bg-indigo-100 w-full p-2 rounded-lg outline-none"
+            type="text"
+            name=""
+            id=""
+            placeholder="search messages"
+          />
         </div>
       </div>
     </>
