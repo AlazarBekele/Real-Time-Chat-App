@@ -2,7 +2,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 
 function Navbar() {
   return (
-    <header className="sticky top-0 z-20 w-full h-18 border-b border-gray-200/80 bg-white/95 backdrop-blur flex items-center shadow-sm">
+    <header className="sticky top-0 z-20 w-full h-[8vh] border-b border-gray-200/80 bg-white/95 backdrop-blur flex items-center">
       <div className="w-1/2 h-full flex items-center justify-end">
         <div className="flex items-center gap-2">
           <div className="size-9 rounded-lg bg-indigo-600 text-white font-bold flex items-center justify-center shadow-sm">
