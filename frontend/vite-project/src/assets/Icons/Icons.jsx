@@ -2,6 +2,7 @@ import { FaPlus, FaRegMessage, FaGoogle, FaGithub } from "react-icons/fa6";
 import { CiSearch, CiUser, CiVideoOn, CiMenuKebab } from "react-icons/ci";
 import { PiPasswordThin, PiPhoneCallThin } from "react-icons/pi";
 import { IoCallOutline } from "react-icons/io5";
+import { BsSend } from "react-icons/bs";
 
 export const Icons = {
   plus: FaPlus,
@@ -14,4 +15,5 @@ export const Icons = {
   call: PiPhoneCallThin,
   videocall: CiVideoOn,
   menu: CiMenuKebab,
+  send: BsSend,
 };

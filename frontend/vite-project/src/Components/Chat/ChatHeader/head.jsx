@@ -3,7 +3,7 @@ import { Icons } from "../../../assets/Icons/Icons";
 function Chathead() {
   return (
     <>
-      <div className="p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50/80">
+      <div className="w-full h-[8vh] p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50/80">
         <div className="flex justify-start items-center gap-4">
           <button
             className="relative rounded-full outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
