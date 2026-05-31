@@ -1,15 +1,14 @@
-import Navbar from "./Components/Nav bar/navbar";
-import Sidebar from "./Components/Sidebar/sidebar";
-import LoginPage from "./Components/LoginPage/loginpage";
+import { Link, Routes, Route } from "react-router-dom";
+import Mainpage from "./Components/Main/mainpage.jsx";
+import LoginPage from "./Components/LoginPage/loginpage.jsx";
 
 function App() {
   return (
     <>
-      <div>
-        {/* <Navbar />
-        <Sidebar /> */}
-        <LoginPage />
-      </div>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/main" element={<Mainpage />} />
+      </Routes>
     </>
   );
 }

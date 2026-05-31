@@ -1,4 +1,5 @@
 import { Icons } from "../../assets/Icons/Icons.jsx";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   return (
@@ -51,7 +52,7 @@ function LoginPage() {
                 className="h-11 text-lg rounded-lg w-full bg-purple-600 font-bold text-white shadow-lg shadow-purple-200 transition hover:bg-purple-700 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
                 type="button"
               >
-                Login
+                <Link to="/main">Login</Link>
               </button>
 
               <p className="pt-3 text-gray-600 text-sm">
