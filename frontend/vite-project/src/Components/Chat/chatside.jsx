@@ -10,14 +10,11 @@ function Chatpage() {
         <div className="w-full h-[8vh]">
           <Chathead />
         </div>
-        <div className="w-full h-[72vh] bg-gray-100">
+        <div className="w-full h-[75vh] bg-gray-100">
           <Chatbody />
         </div>
-        <div className="w-full h-[8vh] bg-sky-50">
-          <Chatinput />
-        </div>
         <div className="w-full h-[5vh]">
-          <Chatfooter />
+          <Chatinput />
         </div>
       </div>
     </>
