@@ -1,7 +1,28 @@
-import { Icons } from "../../assets/Icons/Icons.jsx";
+import { Icons } from "../../../assets/Icons/Icons.jsx";
 import { Link } from "react-router-dom";
 
+// Verify authenticated user
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../Firebase/firebase.js";
+
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handelLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console.log(userCredential.user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <div className="w-full h-screen relative bg-sky-50 flex justify-center items-center">
