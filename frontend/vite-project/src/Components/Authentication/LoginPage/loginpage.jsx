@@ -41,15 +41,16 @@ function LoginPage() {
             <div className="w-full flex flex-col gap-3">
               <label className="w-full px-2 relative block">
                 <span className="mb-1 block text-sm font-semibold text-gray-700">
-                  Username
+                  Email
                 </span>
                 <Icons.user className="text-gray-500 absolute left-6 top-[42px] -translate-y-1/2" />
                 <input
                   className="ps-10 bg-indigo-100 w-full h-[48px] shadow-sm p-2 rounded-lg outline-none border border-transparent text-gray-800 placeholder:text-gray-500 transition focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
-                  type="text"
+                  type="email"
                   name="username"
                   id="username"
-                  placeholder="Enter your username"
+                  placeholder="Example@gmail.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </label>
 
@@ -64,6 +65,7 @@ function LoginPage() {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
             </div>
@@ -72,6 +74,7 @@ function LoginPage() {
               <button
                 className="h-11 text-lg rounded-lg w-full bg-purple-600 font-bold text-white shadow-lg shadow-purple-200 transition hover:bg-purple-700 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
                 type="button"
+                onClick={handelLogin}
               >
                 <Link to="/main">Login</Link>
               </button>
