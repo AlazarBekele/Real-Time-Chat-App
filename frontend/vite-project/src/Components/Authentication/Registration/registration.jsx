@@ -15,6 +15,10 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const clearForm = () => {
+    (setFirstname(""), setLastname(""), setEmail(""), setPassword(""));
+  };
+
   const handleRegister = async () => {
     try {
       console.log("Step 1");
@@ -41,6 +45,8 @@ function Register() {
         displayName: `${firstname} ${lastname}`,
       });
 
+      clearForm();
+
       console.log(`User ${firstname} ${lastname} is Regisiter Successfully!!`);
       console.log("Step 3");
     } catch (error) {
@@ -63,6 +69,7 @@ function Register() {
             <Icons.name className="text-gray-500 absolute left-6 top-[42px] -translate-y-1/2" />
             <input
               className="ps-10 bg-indigo-100 w-full h-[48px] shadow-sm p-2 rounded-lg outline-none border border-transparent text-gray-800 placeholder:text-gray-500 transition focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
+              value={firstname}
               type="text"
               id="username"
               placeholder="Jone"
@@ -77,6 +84,7 @@ function Register() {
             <Icons.name className="text-gray-500 absolute left-6 top-[42px] -translate-y-1/2" />
             <input
               className="ps-10 bg-indigo-100 w-full h-[48px] shadow-sm p-2 rounded-lg outline-none border border-transparent text-gray-800 placeholder:text-gray-500 transition focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
+              value={lastname}
               type="text"
               id="username"
               placeholder="Doe"
@@ -91,6 +99,7 @@ function Register() {
             <Icons.user className="text-gray-500 absolute left-6 top-[42px] -translate-y-1/2" />
             <input
               className="ps-10 bg-indigo-100 w-full h-[48px] shadow-sm p-2 rounded-lg outline-none border border-transparent text-gray-800 placeholder:text-gray-500 transition focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
+              value={email}
               type="email"
               id="username"
               placeholder="Example@gmail.com"
@@ -105,6 +114,7 @@ function Register() {
             <Icons.passowrd className="text-gray-500 absolute left-6 top-[42px] -translate-y-1/2" />
             <input
               className="ps-10 bg-indigo-100 w-full h-[48px] shadow-sm p-2 rounded-lg outline-none border border-transparent text-gray-800 placeholder:text-gray-500 transition focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
+              value={password}
               type="password"
               id="username"
               placeholder="*********"
