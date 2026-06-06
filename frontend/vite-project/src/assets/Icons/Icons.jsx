@@ -3,6 +3,7 @@ import { CiSearch, CiUser, CiVideoOn, CiMenuKebab } from "react-icons/ci";
 import { PiPasswordThin, PiPhoneCallThin } from "react-icons/pi";
 import { IoCallOutline } from "react-icons/io5";
 import { BsSend } from "react-icons/bs";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
 export const Icons = {
   plus: FaPlus,
@@ -16,4 +17,5 @@ export const Icons = {
   videocall: CiVideoOn,
   menu: CiMenuKebab,
   send: BsSend,
+  name: MdDriveFileRenameOutline,
 };
