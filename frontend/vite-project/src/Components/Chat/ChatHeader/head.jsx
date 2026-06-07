@@ -1,18 +1,19 @@
 import { Icons } from "../../../assets/Icons/Icons";
 
-function Chathead() {
+function Chathead({ setView }) {
   return (
     <>
       <div className="w-full h-[8vh] p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50/80">
         <div className="flex justify-start items-center gap-4">
           <button
-            className="relative rounded-full outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+            className="relative rounded-full outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 cursor-pointer"
             type="button"
           >
             <img
               className="object-cover size-14 rounded-full ring-4 ring-white shadow-sm"
               src="https://i.pinimg.com/736x/57/bb/d3/57bbd33f3b0d9159e3d9d3e9f4ac6450.jpg"
               alt="Profile"
+              onClick={() => setView("profile")}
             />
             <span className="absolute bottom-0 right-0 size-4 rounded-full border-2 border-white bg-emerald-500"></span>
           </button>
