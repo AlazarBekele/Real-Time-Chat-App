@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Icons } from "../../../assets/Icons/Icons";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+
 import { auth, db } from "../../../firebase/firebase";
 
 // Showing Authentication row

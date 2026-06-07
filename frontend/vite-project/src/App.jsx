@@ -1,4 +1,5 @@
 import { Link, Routes, Route } from "react-router-dom";
+// Pages
 import Mainpage from "./Components/Main/mainpage.jsx";
 import LoginPage from "./Components/Authentication/LoginPage/loginpage.jsx";
 import Register from "./Components/Authentication/Registration/registration.jsx";

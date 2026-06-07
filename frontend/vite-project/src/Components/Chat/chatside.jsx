@@ -1,17 +1,20 @@
+import { useState } from "react";
 import Chathead from "./ChatHeader/head";
-import Chatbody from "./ChatBody/chatbody";
+// Render Multi Components
+import RenderChatBody from "./renderComponent/renderComponent";
 import Chatinput from "./Ownerinput/Chatinput";
 import Chatfooter from "./ChatFooter/chatfooter";
 
 function Chatpage() {
+  const [view, setView] = useState("chat");
   return (
     <>
       <div className="w-[80%] h-screen">
         <div className="w-full h-[8vh]">
-          <Chathead />
+          <Chathead setView={setView} />
         </div>
         <div className="w-full h-[72vh] bg-gray-100">
-          <Chatbody />
+          <RenderChatBody view={view} setView={setView} />
         </div>
         <div className="w-full h-[8vh]">
           <Chatinput />
