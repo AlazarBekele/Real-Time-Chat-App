@@ -1,52 +1,17 @@
-const messages = [
-  {
-    id: 1,
-    sender: "Larry",
-    text: "Hey Alazar, are you there?",
-    time: "7:48 PM",
-    owner: false,
-  },
-  {
-    id: 2,
-    sender: "You",
-    text: "Hi Larry! Yes, I am here. I was polishing the chat page layout.",
-    time: "7:50 PM",
-    owner: true,
-    status: "Seen",
-  },
-  {
-    id: 3,
-    sender: "Larry",
-    text: "Nice. The sidebar feels much better already. Can we make the message area feel cleaner too?",
-    time: "7:52 PM",
-    owner: false,
-  },
-  {
-    id: 4,
-    sender: "You",
-    text: "Absolutely. I am improving the spacing, message bubbles, timestamps, and the overall reading flow.",
-    time: "7:55 PM",
-    owner: true,
-    status: "Seen",
-  },
-  {
-    id: 5,
-    sender: "Larry",
-    text: "Perfect. A simple, modern chat thread would match the rest of the UI.",
-    time: "7:58 PM",
-    owner: false,
-  },
-  {
-    id: 6,
-    sender: "You",
-    text: "Done. The message list is now data-driven, easier to maintain, and ready for real messages later.",
-    time: "8:00 PM",
-    owner: true,
-    status: "Delivered",
-  },
-];
+import { useEffect, useState } from "react";
+import { db } from "../../../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function Chatbody() {
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      text: "Hello World",
+      owner: false,
+      time: "Now",
+    },
+  ]);
+
   return (
     <section className="h-full w-full overflow-hidden bg-gray-100">
       <div className="flex h-full flex-col overflow-auto px-6 py-5">
@@ -76,7 +41,9 @@ function Chatbody() {
                       : "rounded-bl-md border border-gray-200 bg-white text-gray-800"
                   }`}
                 >
-                  <p className="break-words text-sm leading-6">{message.text}</p>
+                  <p className="break-words text-sm leading-6">
+                    {message.text}
+                  </p>
                 </div>
 
                 <div
