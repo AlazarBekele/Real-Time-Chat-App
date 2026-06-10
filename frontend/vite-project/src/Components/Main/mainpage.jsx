@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 import Navbar from "../Nav bar/navbar";
 import Sidebar from "../Sidebar/sidebar";
 import Chatpage from "../Chat/chatside";
 
 function Mainpage() {
+  const [selectedConversation, setSelectedConversation] = useState(null);
   return (
     <>
       <div className="w-full max-h-[100vh] overflow-hidden">
@@ -10,8 +13,8 @@ function Mainpage() {
           <Navbar />
         </div>
         <div className="w-full h-[92%] flex justify-center itmes-center">
-          <Sidebar />
-          <Chatpage />
+          <Sidebar setSelectedConversation={setSelectedConversation} />
+          <Chatpage selectedConversation={selectedConversation?.id} />
         </div>
       </div>
     </>

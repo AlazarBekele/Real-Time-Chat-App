@@ -5,7 +5,7 @@ import RenderChatBody from "./renderComponent/renderComponent";
 import Chatinput from "./Ownerinput/Chatinput";
 import Chatfooter from "./ChatFooter/chatfooter";
 
-function Chatpage() {
+function Chatpage({ selectedConversation }) {
   const [view, setView] = useState("chat");
   return (
     <>
@@ -14,7 +14,11 @@ function Chatpage() {
           <Chathead setView={setView} />
         </div>
         <div className="w-full h-[72vh] bg-gray-100">
-          <RenderChatBody view={view} setView={setView} />
+          <RenderChatBody
+            view={view}
+            setView={setView}
+            selectedConversation={selectedConversation}
+          />
         </div>
         <div className="w-full h-[8vh]">
           <Chatinput />
