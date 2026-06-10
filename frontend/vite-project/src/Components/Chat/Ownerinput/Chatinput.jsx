@@ -8,6 +8,7 @@ function Chatinput({ ChatId, currentUser }) {
     if (!message.trim()) return;
 
     console.log("Send:", message);
+    setMessage("");
   };
   return (
     <>
