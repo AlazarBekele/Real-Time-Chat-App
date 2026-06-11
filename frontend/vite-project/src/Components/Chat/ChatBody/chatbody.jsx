@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { auth } from "../../../firebase/firebase";
 
-function Chatbody() {
+function Chatbody({ selectedConversation }) {
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -12,8 +13,15 @@ function Chatbody() {
     },
   ]);
 
+  if (!selectedConversation) {
+    return <h1>Select User!</h1>;
+  }
+
   return (
     <section className="h-full w-full overflow-hidden bg-gray-100">
+      <div>
+        <h1>{selectedConversation.firstname}</h1>
+      </div>
       <div className="flex h-full flex-col overflow-auto px-6 py-5">
         <div className="sticky top-0 z-10 flex justify-center pb-5">
           <span className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-gray-500 shadow-sm">

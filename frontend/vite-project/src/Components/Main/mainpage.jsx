@@ -14,7 +14,7 @@ function Mainpage() {
         </div>
         <div className="w-full h-[92%] flex justify-center itmes-center">
           <Sidebar setSelectedConversation={setSelectedConversation} />
-          <Chatpage selectedConversation={selectedConversation?.id} />
+          <Chatpage selectedConversation={selectedConversation} />
         </div>
       </div>
     </>

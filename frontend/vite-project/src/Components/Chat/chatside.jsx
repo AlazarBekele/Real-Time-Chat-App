@@ -11,7 +11,10 @@ function Chatpage({ selectedConversation }) {
     <>
       <div className="w-[80%] h-screen">
         <div className="w-full h-[8vh]">
-          <Chathead setView={setView} />
+          <Chathead
+            setView={setView}
+            selectedConversation={selectedConversation}
+          />
         </div>
         <div className="w-full h-[72vh] bg-gray-100">
           <RenderChatBody
