@@ -7,6 +7,27 @@ import Chatfooter from "./ChatFooter/chatfooter";
 
 function Chatpage({ selectedConversation }) {
   const [view, setView] = useState("chat");
+
+  if (!selectedConversation) {
+    return (
+      <div className="flex h-screen w-[80%] flex-col bg-gray-100">
+        <div className="flex flex-1 items-center justify-center px-6 text-center">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800">
+              Select a conversation
+            </h1>
+            <p className="mt-2 text-sm text-gray-500">
+              Choose a user from the sidebar to start chatting.
+            </p>
+          </div>
+        </div>
+        <div className="h-[4vh]">
+          <Chatfooter />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="w-[80%] h-screen">
