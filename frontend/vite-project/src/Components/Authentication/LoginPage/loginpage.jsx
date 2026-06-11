@@ -1,12 +1,13 @@
 import { Icons } from "../../../assets/Icons/Icons.jsx";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 // Verify authenticated user
-import { useState } from "react";
+import { use, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase.js";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +18,9 @@ function LoginPage() {
         email,
         password,
       );
-      console.log(userCredential.user);
+
+      console.log("Logged In User", userCredential.user);
+      navigate("/main");
     } catch (error) {
       console.log(error.message);
     }
@@ -76,7 +79,7 @@ function LoginPage() {
                 type="button"
                 onClick={handelLogin}
               >
-                <Link to="/main">Login</Link>
+                Login
               </button>
 
               <p className="pt-3 text-gray-600 text-sm">

@@ -1,6 +1,6 @@
 import { Icons } from "../../../assets/Icons/Icons";
 
-function Chathead({ setView }) {
+function Chathead({ setView, selectedConversation }) {
   return (
     <>
       <div className="w-full h-[8vh] p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50/80">
@@ -11,7 +11,7 @@ function Chathead({ setView }) {
           >
             <img
               className="object-cover size-14 rounded-full ring-4 ring-white shadow-sm"
-              src="https://i.pinimg.com/736x/57/bb/d3/57bbd33f3b0d9159e3d9d3e9f4ac6450.jpg"
+              src={selectedConversation.photoURL}
               alt="Profile"
               onClick={() => setView("profile")}
             />
@@ -19,7 +19,9 @@ function Chathead({ setView }) {
           </button>
 
           <div>
-            <h1 className="font-bold">Larry Willam</h1>
+            <h1 className="font-bold">
+              {selectedConversation.firstname} {selectedConversation.lastname}
+            </h1>
             <p className="font-extralight text-xs text-gray-500">Active now</p>
           </div>
         </div>

@@ -2,27 +2,25 @@ import { Icons } from "../../assets/Icons/Icons.jsx";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase.js";
+import { auth } from "../../firebase/firebase.js";
 
-function Sidebar() {
+function Sidebar({ setSelectedConversation }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(db, "users");
       const snapshot = await getDocs(usersRef);
-      console.log(snapshot.docs);
 
       const userData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(userData);
 
       setUsers(userData);
     };
 
     fetchUsers();
-    console.log(users);
   }, []);
 
   return (
@@ -75,6 +73,11 @@ function Sidebar() {
             key={`${user.uid}`}
             className="group flex w-full items-center gap-3 rounded-2xl p-3 text-left transition hover:bg-gray-50"
             type="button"
+            onClick={() => {
+              {
+                setSelectedConversation(user);
+              }
+            }}
           >
             <span className="relative shrink-0">
               <img
