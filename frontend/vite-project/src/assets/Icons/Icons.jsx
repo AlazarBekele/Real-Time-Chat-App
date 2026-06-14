@@ -4,6 +4,7 @@ import { PiPasswordThin, PiPhoneCallThin } from "react-icons/pi";
 import { IoArrowBackOutline, IoCallOutline } from "react-icons/io5";
 import { BsSend } from "react-icons/bs";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { HiLogout } from "react-icons/hi";
 
 export const Icons = {
   plus: FaPlus,
@@ -19,4 +20,5 @@ export const Icons = {
   send: BsSend,
   name: MdDriveFileRenameOutline,
   back: IoArrowBackOutline,
+  logout: HiLogout,
 };

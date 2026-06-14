@@ -1,15 +1,17 @@
 import { useState } from "react";
 // Icons
 import { Icons } from "../../../assets/Icons/Icons";
-
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth, db } from "../../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 // Showing Authentication row
 import { updateProfile } from "firebase/auth";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -21,16 +23,13 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      console.log("Step 1");
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
       );
 
-      console.log("Step 2");
       const user = userCredential.user;
-
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         firstname: firstname,
@@ -46,9 +45,10 @@ function Register() {
       });
 
       clearForm();
-
-      console.log(`User ${firstname} ${lastname} is Regisiter Successfully!!`);
-      console.log("Step 3");
+      // SignOut After Registration Complate
+      await signOut(auth);
+      alert("Registration Success. Please Login");
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         window.alert("The Email Is Already Used!");

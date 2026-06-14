@@ -1,6 +1,13 @@
 import { IoSettingsOutline } from "react-icons/io5";
+import { Icons } from "../../assets/Icons/Icons";
+import { auth } from "../../firebase/firebase";
+import { signOut } from "firebase/auth";
 
 function Navbar() {
+  const LogOut = () => {
+    signOut(auth);
+  };
+
   return (
     <header className="sticky top-0 z-20 w-full h-[8vh] border-b border-gray-200/80 bg-white/95 backdrop-blur flex items-center">
       <div className="w-1/2 h-full flex items-center justify-end">
@@ -35,9 +42,10 @@ function Navbar() {
           <button
             className="size-10 rounded-full text-gray-600 flex items-center justify-center transition duration-300 hover:bg-indigo-100 hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
             type="button"
-            aria-label="Settings"
+            aria-label="Logout"
+            onClick={LogOut}
           >
-            <IoSettingsOutline size={22} />
+            <Icons.logout size={22} />
           </button>
         </div>
       </div>

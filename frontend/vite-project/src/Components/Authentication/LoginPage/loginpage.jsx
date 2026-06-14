@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 // Verify authenticated user
 import { use, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../Firebase/firebase.js";
+import { auth, db } from "../../../Firebase/firebase.js";
+import { doc, updateDoc } from "firebase/firestore";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [check, setCheck] = useState(false);
 
   const handelLogin = async () => {
     try {
@@ -19,7 +21,15 @@ function LoginPage() {
         password,
       );
 
-      console.log("Logged In User", userCredential.user);
+      const user = userCredential.user;
+      if (!check) {
+        alert("must Checkbox");
+        return;
+      }
+      await updateDoc(doc(db, "users", user.uid), {
+        acceptLogin: true,
+      });
+
       navigate("/main");
     } catch (error) {
       console.log(error.message);
@@ -71,6 +81,14 @@ function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
+            </div>
+
+            <div>
+              <label>Check To Pass</label>
+              <input
+                type="checkbox"
+                onChange={(e) => setCheck(e.target.value)}
+              />
             </div>
 
             <div className="w-full p-4 pb-3 flex flex-col justify-center items-center">
