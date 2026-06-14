@@ -6,7 +6,8 @@ import { auth } from "../../firebase/firebase.js";
 
 function Sidebar({ setSelectedConversation }) {
   const [users, setUsers] = useState([]);
-
+  const DefaultProfile =
+    "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(db, "users");
@@ -82,8 +83,11 @@ function Sidebar({ setSelectedConversation }) {
             <span className="relative shrink-0">
               <img
                 className="size-12 rounded-full object-cover ring-2 ring-white"
-                src={user.photoURL}
+                src={user.photoURL || DefaultProfile}
                 alt={`${user.firstname} ${user.lastname}`}
+                onError={(event) => {
+                  event.currentTarget.src = DefaultProfile;
+                }}
               />
               <span
                 className={`absolute bottom-0 right-0 size-3.5 rounded-full border-2 border-white ${

@@ -1,6 +1,8 @@
 import { Icons } from "../../../assets/Icons/Icons";
 
 function Chathead({ setView, selectedConversation }) {
+  const DefaultProfile =
+    "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
   return (
     <>
       <div className="w-full h-[8vh] p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50/80">
@@ -11,7 +13,7 @@ function Chathead({ setView, selectedConversation }) {
           >
             <img
               className="object-cover size-14 rounded-full ring-4 ring-white shadow-sm"
-              src={selectedConversation.photoURL}
+              src={selectedConversation.photoURL || DefaultProfile}
               alt="Profile"
               onClick={() => setView("profile")}
             />

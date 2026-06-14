@@ -23,7 +23,7 @@ function App() {
         navigate("/main");
       }
       if (!user) {
-        navigate("/register");
+        navigate("/");
       }
     });
 
