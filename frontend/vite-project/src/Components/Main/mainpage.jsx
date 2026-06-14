@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Navbar from "../Nav bar/navbar";
 import Sidebar from "../Sidebar/sidebar";
@@ -6,6 +6,7 @@ import Chatpage from "../Chat/chatside";
 
 function Mainpage() {
   const [selectedConversation, setSelectedConversation] = useState(null);
+
   return (
     <>
       <div className="w-full max-h-[100vh] overflow-hidden">

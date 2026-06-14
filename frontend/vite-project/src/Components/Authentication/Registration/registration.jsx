@@ -21,16 +21,6 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      console.log("Step 1");
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-
-      console.log("Step 2");
-      const user = userCredential.user;
-
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         firstname: firstname,
@@ -48,7 +38,6 @@ function Register() {
       clearForm();
 
       console.log(`User ${firstname} ${lastname} is Regisiter Successfully!!`);
-      console.log("Step 3");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         window.alert("The Email Is Already Used!");

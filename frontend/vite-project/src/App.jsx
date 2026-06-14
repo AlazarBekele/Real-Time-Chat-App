@@ -7,11 +7,12 @@ import Register from "./Components/Authentication/Registration/registration.jsx"
 // Refresh
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // ProtectedRoute
 import ProtectedRoute from "./Components/routes/ProtectedRoute.jsx";
-import { auth } from "./firebase/firebase.js";
+import { auth, db } from "./firebase/firebase.js";
+import { doc, getDoc } from "firebase/firestore";
 
 function App() {
   const navigate = useNavigate();
@@ -20,12 +21,31 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate("/main");
-      } else {
-        navigate("/");
+      }
+      if (!user) {
+        navigate("/register");
       }
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const CurrentUserProfile = async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        console.log("No User Logged IN");
+      }
+
+      const docRef = doc(db, "users", user.uid);
+      const snap = await getDoc(docRef);
+
+      if (snap.exists) {
+        console.log(snap.data());
+      }
+    };
+
+    CurrentUserProfile();
   }, []);
 
   return (
