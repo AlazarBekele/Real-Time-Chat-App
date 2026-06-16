@@ -22,15 +22,15 @@ function LoginPage() {
       );
 
       const user = userCredential.user;
-      if (!check) {
-        alert("must Checkbox");
-        return;
-      }
       await updateDoc(doc(db, "users", user.uid), {
         acceptLogin: true,
       });
 
-      navigate("/main");
+      if (!check) {
+        alert("must Checkbox");
+      } else {
+        navigate("/main");
+      }
     } catch (error) {
       console.log(error.message);
     }

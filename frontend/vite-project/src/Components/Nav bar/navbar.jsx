@@ -1,12 +1,33 @@
 import { IoSettingsOutline } from "react-icons/io5";
 import { Icons } from "../../assets/Icons/Icons";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 function Navbar() {
   const LogOut = () => {
     signOut(auth);
   };
+
+  const CurrentUser = auth.currentUser;
+  console.log(CurrentUser.uid);
+
+  const getCurrentUserInfo = async () => {
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    const docRef = doc(db, "users", user.uid);
+    const snap = await getDoc(docRef);
+
+    if (snap.exists()) {
+      console.log(snap.data());
+    } else {
+      console.log("No user docs are there");
+    }
+  };
+
+  getCurrentUserInfo();
 
   return (
     <header className="sticky top-0 z-20 w-full h-[8vh] border-b border-gray-200/80 bg-white/95 backdrop-blur flex items-center">
