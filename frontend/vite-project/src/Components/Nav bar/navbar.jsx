@@ -9,9 +9,6 @@ function Navbar() {
     signOut(auth);
   };
 
-  const CurrentUser = auth.currentUser;
-  console.log(CurrentUser.uid);
-
   const getCurrentUserInfo = async () => {
     const user = auth.currentUser;
 
