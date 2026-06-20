@@ -3,11 +3,17 @@ import { Icons } from "../../assets/Icons/Icons";
 import { auth, db } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useState } from "react";
 
 function Navbar() {
   const LogOut = () => {
     signOut(auth);
   };
+
+  const DefaultProfile =
+    "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
+
+  const [passCurrentUser, setpassCurrentUser] = useState(null);
 
   const getCurrentUserInfo = async () => {
     const user = auth.currentUser;
@@ -18,7 +24,7 @@ function Navbar() {
     const snap = await getDoc(docRef);
 
     if (snap.exists()) {
-      console.log(snap.data());
+      const userData = setpassCurrentUser(snap.data());
     } else {
       console.log("No user docs are there");
     }
@@ -49,7 +55,7 @@ function Navbar() {
           >
             <img
               className="object-cover size-11 rounded-full ring-2 ring-white shadow-sm"
-              src="https://i.pinimg.com/736x/57/bb/d3/57bbd33f3b0d9159e3d9d3e9f4ac6450.jpg"
+              src={DefaultProfile}
               alt="Profile"
             />
             <span className="absolute bottom-0 right-0 size-3 rounded-full border-2 border-white bg-emerald-500"></span>

@@ -1,14 +1,21 @@
+import { useEffect, useState } from "react";
 import { Icons } from "../../assets/Icons/Icons";
+import { auth, db } from "../../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
-function UserProfile({ setView }) {
-  const imgUrl =
-    "https://i.pinimg.com/736x/57/bb/d3/57bbd33f3b0d9159e3d9d3e9f4ac6450.jpg";
+function UserProfile({ setView, selectedConversation }) {
+  const DefaultProfile =
+    "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
 
   const profileDetails = [
     { label: "Username", value: "@larrywillam" },
     { label: "Phone", value: "+1 (555) 017-2849" },
     { label: "Shared media", value: "124 files" },
   ];
+
+  const [userProfileChat, setuserProfileChat] = useState(null);
+
+  const userIdFunction = () => {};
 
   return (
     <aside className="h-[95%] w-full max-w-[500px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
@@ -26,14 +33,17 @@ function UserProfile({ setView }) {
             <div className="relative">
               <img
                 className="size-28 rounded-full object-cover ring-4 ring-white shadow-md"
-                src={imgUrl}
+                src={selectedConversation?.photoURL || DefaultProfile}
                 alt="Larry Willam"
               />
               <span className="absolute bottom-2 right-2 size-5 rounded-full border-[3px] border-white bg-emerald-500"></span>
             </div>
 
             <div className="mt-4">
-              <h1 className="text-xl font-bold text-gray-900">Larry Willam</h1>
+              <h1 className="text-xl font-bold text-gray-900">
+                {selectedConversation?.firstname}{" "}
+                {selectedConversation?.lastname}
+              </h1>
               <p className="mt-1 text-sm font-medium text-emerald-600">
                 Active now
               </p>
