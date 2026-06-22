@@ -9,7 +9,12 @@ function RenderChatBody({ view, setView, selectedConversation }) {
         {view === "chat" && (
           <Chatbody selectedConversation={selectedConversation} />
         )}
-        {view === "profile" && <UserProfile setView={setView} />}
+        {view === "profile" && (
+          <UserProfile
+            setView={setView}
+            selectedConversation={selectedConversation}
+          />
+        )}
       </div>
     </>
   );

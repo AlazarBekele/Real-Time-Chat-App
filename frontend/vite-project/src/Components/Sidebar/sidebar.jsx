@@ -1,6 +1,6 @@
 import { Icons } from "../../assets/Icons/Icons.jsx";
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase.js";
 import { auth } from "../../firebase/firebase.js";
 
@@ -8,20 +8,24 @@ function Sidebar({ setSelectedConversation }) {
   const [users, setUsers] = useState([]);
   const DefaultProfile =
     "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const usersRef = collection(db, "users");
-      const snapshot = await getDocs(usersRef);
 
-      const userData = snapshot.docs.map((doc) => ({
+  useEffect(() => {
+    const getUsers = async () => {
+      const querySnapshot = await getDocs(collection(db, "users"));
+
+      const userList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setUsers(userData);
+      const filteredUsers = userList.filter(
+        (user) => user.uid !== auth.currentUser.uid,
+      );
+
+      setUsers(filteredUsers);
     };
 
-    fetchUsers();
+    getUsers();
   }, []);
 
   return (
