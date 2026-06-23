@@ -1,15 +1,43 @@
 import { useState } from "react";
+import { auth } from "../../../firebase/firebase";
 import { Icons } from "../../../assets/Icons/Icons";
+import { db } from "../../../firebase/firebase";
+import {
+  collection,
+  setDoc,
+  serverTimestamp,
+  doc,
+  addDoc,
+} from "firebase/firestore";
 
-function Chatinput({ ChatId, currentUser }) {
+function Chatinput({ selectedConversation }) {
   const [message, setMessage] = useState("");
 
   const handelSend = async () => {
-    if (!message.trim()) return;
+    // Participan Conversation
+    const CurrentUser = auth.currentUser;
+    const ParticipantUser = selectedConversation;
 
-    console.log("Send:", message);
-    setMessage("");
+    const chatId = [CurrentUser.uid, ParticipantUser.uid].sort().join("_");
+
+    if (!message.trim()) return;
+    console.log(message);
+
+    await setDoc(doc(db, "chats", "users"), {
+      participants: chatId,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+    console.log("Save on DB!!");
+
+    await addDoc(collection(db, "chats", "users", "messages"), {
+      senderId: CurrentUser.uid,
+      text: message,
+      createdAt: serverTimestamp(),
+    });
+    console.log("Message Saved!!");
   };
+
   return (
     <>
       <div className="w-full p-4 flex justify-start items-center border-t border-gray-200">

@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs } from "firebase/firestore";
 import { auth } from "../../../firebase/firebase";
 
 function Chatbody({ selectedConversation }) {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Hello World",
-      owner: false,
-      time: "Now",
-    },
-  ]);
-
   if (!selectedConversation) {
     return <h1>Select User!</h1>;
   }
@@ -30,48 +21,9 @@ function Chatbody({ selectedConversation }) {
         </div>
 
         <div className="mt-auto flex flex-col gap-4 pb-2">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex w-full ${
-                message.owner ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`flex max-w-[58%] flex-col ${
-                  message.owner ? "items-end" : "items-start"
-                }`}
-              >
-                <div
-                  className={`rounded-2xl px-4 py-3 shadow-sm ${
-                    message.owner
-                      ? "rounded-br-md bg-indigo-600 text-white"
-                      : "rounded-bl-md border border-gray-200 bg-white text-gray-800"
-                  }`}
-                >
-                  <p className="break-words text-sm leading-6">
-                    {message.text}
-                  </p>
-                </div>
-
-                <div
-                  className={`mt-1 flex items-center gap-2 px-1 text-[11px] ${
-                    message.owner ? "text-indigo-200" : "text-gray-400"
-                  }`}
-                >
-                  <span className={message.owner ? "text-gray-400" : ""}>
-                    {message.time}
-                  </span>
-                  {message.status && (
-                    <>
-                      <span className="text-gray-300">•</span>
-                      <span className="text-gray-400">{message.status}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+          <div>
+            <h1>Hello</h1>
+          </div>
 
           <div className="flex justify-start">
             <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 shadow-sm">

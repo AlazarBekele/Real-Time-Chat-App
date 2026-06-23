@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Chathead from "./ChatHeader/head";
+
 // Render Multi Components
 import RenderChatBody from "./renderComponent/renderComponent";
 import Chatinput from "./Ownerinput/Chatinput";
@@ -45,7 +46,7 @@ function Chatpage({ selectedConversation }) {
           />
         </div>
         <div className="w-full h-[8vh]">
-          <Chatinput />
+          <Chatinput selectedConversation={selectedConversation} />
         </div>
         <div className="w-full h-[4vh]">
           <Chatfooter />
