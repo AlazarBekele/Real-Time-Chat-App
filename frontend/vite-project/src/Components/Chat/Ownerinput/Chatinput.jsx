@@ -8,6 +8,7 @@ import {
   serverTimestamp,
   doc,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 function Chatinput({ selectedConversation }) {
@@ -18,24 +19,31 @@ function Chatinput({ selectedConversation }) {
     const CurrentUser = auth.currentUser;
     const ParticipantUser = selectedConversation;
 
-    const chatId = [CurrentUser.uid, ParticipantUser.uid].sort().join("_");
+    const chatID = [CurrentUser.uid, ParticipantUser.uid].sort().join("_");
 
     if (!message.trim()) return;
     console.log(message);
 
-    await setDoc(doc(db, "chats", "users"), {
-      participants: chatId,
+    await setDoc(doc(db, "chats", chatID), {
+      participants: chatID,
+      lastMessage: message,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
     console.log("Save on DB!!");
 
-    await addDoc(collection(db, "chats", "users", "messages"), {
+    await addDoc(collection(db, "chats", chatID, "messages"), {
       senderId: CurrentUser.uid,
       text: message,
       createdAt: serverTimestamp(),
     });
     console.log("Message Saved!!");
+
+    await updateDoc(doc(db, "chats", chatID), {
+      lastMessage: message,
+      createdAt: serverTimestamp(),
+    });
+    console.log("Update the metadata!!");
   };
 
   return (

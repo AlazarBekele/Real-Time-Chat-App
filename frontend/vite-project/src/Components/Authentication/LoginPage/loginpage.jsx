@@ -6,6 +6,7 @@ import { use, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../Firebase/firebase.js";
 import { doc, updateDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 function LoginPage() {
   const navigate = useNavigate();

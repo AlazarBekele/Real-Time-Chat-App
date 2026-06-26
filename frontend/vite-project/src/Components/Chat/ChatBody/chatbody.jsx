@@ -8,6 +8,10 @@ function Chatbody({ selectedConversation }) {
     return <h1>Select User!</h1>;
   }
 
+  useEffect(() => {
+    getDocs(collection(db, "chats", "users", "messages"));
+  });
+
   return (
     <section className="h-full w-full overflow-hidden bg-gray-100">
       <div>
