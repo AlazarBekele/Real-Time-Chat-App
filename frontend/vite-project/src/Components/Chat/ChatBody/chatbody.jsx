@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase/firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { auth } from "../../../firebase/firebase";
 
 function Chatbody({ selectedConversation }) {
@@ -8,8 +15,24 @@ function Chatbody({ selectedConversation }) {
     return <h1>Select User!</h1>;
   }
 
-  useEffect(() => {
-    getDocs(collection(db, "chats", "users", "messages"));
+  const CurrentUser = auth.currentUser;
+  const ParticipantUser = selectedConversation;
+  const chatID = [CurrentUser.uid, ParticipantUser.uid].sort().join("_");
+
+  const q = query(
+    collection(db, "chats", chatID, "messages"),
+    orderBy("createdAt", "asc"),
+  );
+
+  const [messages, setMessages] = useState([]);
+
+  onSnapshot(q, (snapshot) => {
+    const chatMessages = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setMessages(chatMessages);
   });
 
   return (
@@ -26,7 +49,11 @@ function Chatbody({ selectedConversation }) {
 
         <div className="mt-auto flex flex-col gap-4 pb-2">
           <div>
-            <h1>Hello</h1>
+            {messages.map((messages) => (
+              <div key={messages.id}>
+                <p>{messages.text}</p>
+              </div>
+            ))}
           </div>
 
           <div className="flex justify-start">
