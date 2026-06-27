@@ -36,11 +36,8 @@ function Chatbody({ selectedConversation }) {
   });
 
   return (
-    <section className="h-full w-full overflow-hidden bg-gray-100">
-      <div>
-        <h1>{selectedConversation.firstname}</h1>
-      </div>
-      <div className="flex h-full flex-col overflow-auto px-6 py-5">
+    <section className="h-full w-full overflow-hidden bg-gray-100 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-auto px-6 py-5">
         <div className="sticky top-0 z-10 flex justify-center pb-5">
           <span className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-gray-500 shadow-sm">
             Today
@@ -48,14 +45,26 @@ function Chatbody({ selectedConversation }) {
         </div>
 
         <div className="mt-auto flex flex-col gap-4 pb-2">
-          <div>
-            {messages.map((messages) => (
-              <div key={messages.id}>
-                <p>{messages.text}</p>
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex ${
+                message.senderId === CurrentUser.uid
+                  ? "justify-end"
+                  : "justify-start"
+              }`}
+            >
+              <div
+                className={`max-w-[70%] rounded-lg px-3 py-2 ${
+                  message.senderId === CurrentUser.uid
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                <p>{message.text}</p>
               </div>
-            ))}
-          </div>
-
+            </div>
+          ))}
           <div className="flex justify-start">
             <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 shadow-sm">
               <span className="size-2 rounded-full bg-gray-300"></span>
