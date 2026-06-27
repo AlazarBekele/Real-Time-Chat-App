@@ -1,15 +1,51 @@
 import { useState } from "react";
+import { auth } from "../../../firebase/firebase";
 import { Icons } from "../../../assets/Icons/Icons";
+import { db } from "../../../firebase/firebase";
+import {
+  collection,
+  setDoc,
+  serverTimestamp,
+  doc,
+  addDoc,
+  updateDoc,
+} from "firebase/firestore";
 
-function Chatinput({ ChatId, currentUser }) {
+function Chatinput({ selectedConversation }) {
   const [message, setMessage] = useState("");
 
   const handelSend = async () => {
-    if (!message.trim()) return;
+    // Participan Conversation
+    const CurrentUser = auth.currentUser;
+    const ParticipantUser = selectedConversation;
 
-    console.log("Send:", message);
-    setMessage("");
+    const chatID = [CurrentUser.uid, ParticipantUser.uid].sort().join("_");
+
+    if (!message.trim()) return;
+    console.log(message);
+
+    await setDoc(doc(db, "chats", chatID), {
+      participants: chatID,
+      lastMessage: message,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+    console.log("Save on DB!!");
+
+    await addDoc(collection(db, "chats", chatID, "messages"), {
+      senderId: CurrentUser.uid,
+      text: message,
+      createdAt: serverTimestamp(),
+    });
+    console.log("Message Saved!!");
+
+    await updateDoc(doc(db, "chats", chatID), {
+      lastMessage: message,
+      createdAt: serverTimestamp(),
+    });
+    console.log("Update the metadata!!");
   };
+
   return (
     <>
       <div className="w-full p-4 flex justify-start items-center border-t border-gray-200">
