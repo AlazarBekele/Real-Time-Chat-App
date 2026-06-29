@@ -13,25 +13,6 @@ function Navbar() {
   const DefaultProfile =
     "https://tse2.mm.bing.net/th/id/OIP.2WwhkFMbYJ0p02JO6S-rHQHaHa?r=0&cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3";
 
-  const [passCurrentUser, setpassCurrentUser] = useState(null);
-
-  const getCurrentUserInfo = async () => {
-    const user = auth.currentUser;
-
-    if (!user) return;
-
-    const docRef = doc(db, "users", user.uid);
-    const snap = await getDoc(docRef);
-
-    if (snap.exists()) {
-      const userData = setpassCurrentUser(snap.data());
-    } else {
-      console.log("No user docs are there");
-    }
-  };
-
-  getCurrentUserInfo();
-
   return (
     <header className="sticky top-0 z-20 w-full h-[8vh] border-b border-gray-200/80 bg-white/95 backdrop-blur flex items-center">
       <div className="w-1/2 h-full flex items-center justify-end">
